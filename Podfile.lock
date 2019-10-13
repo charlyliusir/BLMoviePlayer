@@ -1,0 +1,20 @@
+PODS:
+  - LookinServer (0.9.3)
+  - ReactiveObjC (3.1.1)
+
+DEPENDENCIES:
+  - LookinServer
+  - ReactiveObjC
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - LookinServer
+    - ReactiveObjC
+
+SPEC CHECKSUMS:
+  LookinServer: 44f1b5f32743dc61068a156ff86b5b47d0a82943
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+
+PODFILE CHECKSUM: 37829e7fc05ebfb8b2a061327c201fc0e472105d
+
+COCOAPODS: 1.5.0

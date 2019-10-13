@@ -1,0 +1,20 @@
+//
+//  BLMoviePlayer.pch
+//  BLMoviePlayer
+//
+//  Created by Simon on 2019/8/2.
+//  Copyright © 2019 Simon. All rights reserved.
+//
+
+#ifndef BLMoviePlayer_pch
+#define BLMoviePlayer_pch
+
+// Include any system framew#import "BLMovieEnmuConst.h"ork and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+    #ifdef __OBJC__
+    #import <ReactiveObjC/ReactiveObjC.h>
+    #import "BLMovieConstHeader.h"
+    #endif
+
+#endif /* BLMoviePlayer_pch */

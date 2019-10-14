@@ -188,7 +188,7 @@
  * Muxers take encoded data in the form of @ref AVPacket "AVPackets" and write
  * it into files or other output bytestreams in the specified container format.
  *
- * The main API functions for muxing are avformat_write_header() for writing the
+ * The main API functions for muxing are &avformat_write_header() for writing the
  * file header, av_write_frame() / av_interleaved_write_frame() for writing the
  * packets and av_write_trailer() for finalizing the file.
  *

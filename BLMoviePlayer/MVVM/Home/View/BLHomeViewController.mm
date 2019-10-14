@@ -7,6 +7,7 @@
 //
 
 #import "BLHomeViewController.h"
+#include "BLFileDecoder.hpp"
 
 @interface BLHomeViewController ()
 
@@ -21,6 +22,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self registRACsignal];
+    
+    BLFileDecoder *decoder = new BLFileDecoder();
+    decoder->init([[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"aac"] UTF8String], 0);
+    BLFilePacketList *pktList = decoder->decodePacket();
+    while (pktList->length() > 0) {
+        BLFilePacket *pkt = pktList->popPacket();
+        NSLog(@"...pkt size...%d", pkt->size);
+    }
 }
 
 - (void)registRACsignal

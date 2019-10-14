@@ -22,7 +22,7 @@
 		7C4A6AE622F9C42C00BEACA8 /* BLBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A6AB922F9C42C00BEACA8 /* BLBaseViewController.m */; };
 		7C4A6AE722F9C42C00BEACA8 /* BLBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A6ABB22F9C42C00BEACA8 /* BLBaseViewModel.m */; };
 		7C4A6AE822F9C42C00BEACA8 /* BLHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC122F9C42C00BEACA8 /* BLHomeViewModel.m */; };
-		7C4A6AE922F9C42C00BEACA8 /* BLHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC322F9C42C00BEACA8 /* BLHomeViewController.m */; };
+		7C4A6AE922F9C42C00BEACA8 /* BLHomeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC322F9C42C00BEACA8 /* BLHomeViewController.mm */; };
 		7C4A6AEA22F9C42C00BEACA8 /* abc.aac in Resources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC622F9C42C00BEACA8 /* abc.aac */; };
 		7C4A6AEB22F9C42C00BEACA8 /* abc.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC722F9C42C00BEACA8 /* abc.m4a */; };
 		7C4A6AEC22F9C42C00BEACA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC822F9C42C00BEACA8 /* Assets.xcassets */; };
@@ -189,7 +189,7 @@
 		7C4A6ABC22F9C42C00BEACA8 /* BLBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLBaseViewController.h; sourceTree = "<group>"; };
 		7C4A6AC022F9C42C00BEACA8 /* BLHomeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLHomeViewModel.h; sourceTree = "<group>"; };
 		7C4A6AC122F9C42C00BEACA8 /* BLHomeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLHomeViewModel.m; sourceTree = "<group>"; };
-		7C4A6AC322F9C42C00BEACA8 /* BLHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLHomeViewController.m; sourceTree = "<group>"; };
+		7C4A6AC322F9C42C00BEACA8 /* BLHomeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BLHomeViewController.mm; sourceTree = "<group>"; };
 		7C4A6AC422F9C42C00BEACA8 /* BLHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLHomeViewController.h; sourceTree = "<group>"; };
 		7C4A6AC622F9C42C00BEACA8 /* abc.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = abc.aac; sourceTree = "<group>"; };
 		7C4A6AC722F9C42C00BEACA8 /* abc.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = abc.m4a; sourceTree = "<group>"; };
@@ -262,9 +262,9 @@
 			isa = PBXGroup;
 			children = (
 				7C4A68F622F9BFF500BEACA8 /* BLMoviePlayer */,
-				7C4A68F522F9BFF500BEACA8 /* Products */,
-				67028A2F7DFFC0667CA53212 /* Pods */,
 				FBF0831416324F16FB8B4580 /* Frameworks */,
+				67028A2F7DFFC0667CA53212 /* Pods */,
+				7C4A68F522F9BFF500BEACA8 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -651,8 +651,8 @@
 		7C4A6AC222F9C42C00BEACA8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7C4A6AC322F9C42C00BEACA8 /* BLHomeViewController.m */,
 				7C4A6AC422F9C42C00BEACA8 /* BLHomeViewController.h */,
+				7C4A6AC322F9C42C00BEACA8 /* BLHomeViewController.mm */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -870,7 +870,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CE9278E2353678C00C39DE9 /* BLVideoOutput.m in Sources */,
-				7C4A6AE922F9C42C00BEACA8 /* BLHomeViewController.m in Sources */,
+				7C4A6AE922F9C42C00BEACA8 /* BLHomeViewController.mm in Sources */,
 				7C4A6ADA22F9C42C00BEACA8 /* main.m in Sources */,
 				7CE9278B2353678100C39DE9 /* BLAudioOutput.m in Sources */,
 				7C4A6AD922F9C42C00BEACA8 /* AppDelegate.m in Sources */,

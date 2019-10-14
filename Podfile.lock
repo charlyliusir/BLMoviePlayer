@@ -7,7 +7,7 @@ DEPENDENCIES:
   - ReactiveObjC
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - LookinServer
     - ReactiveObjC
 
@@ -17,4 +17,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 37829e7fc05ebfb8b2a061327c201fc0e472105d
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

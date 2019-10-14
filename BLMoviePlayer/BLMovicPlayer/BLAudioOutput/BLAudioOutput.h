@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol BLAudioOutputDelegate <NSObject>
+
+- (void)readSample:(Byte *)samples;
+
+@end
+
 @interface BLAudioOutput : NSObject
+
+- (instancetype)initWithSampleRate:(double)sampleRate
+                          channels:(int)channels
+                          delegate:(id <BLAudioOutputDelegate>)delegate;
 
 @end

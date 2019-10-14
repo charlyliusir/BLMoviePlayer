@@ -9,6 +9,9 @@
 #ifndef BLMovieEnumConst_h
 #define BLMovieEnumConst_h
 
+#pragma mark - movie enum
+
+
 typedef NS_ENUM(NSUInteger, BLVCLoadType) {
     BLVCCodingLoad,
     BLVCXibLoad,

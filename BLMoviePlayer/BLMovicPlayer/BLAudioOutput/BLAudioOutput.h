@@ -10,7 +10,7 @@
 
 @protocol BLAudioOutputDelegate <NSObject>
 
-- (void)readSample:(Byte *)samples;
+- (void)readSamples:(short *)samples withNumberFrame:(UInt32)numberFrame channels:(UInt32)channels;
 
 @end
 
@@ -19,5 +19,8 @@
 - (instancetype)initWithSampleRate:(double)sampleRate
                           channels:(int)channels
                           delegate:(id <BLAudioOutputDelegate>)delegate;
+
+- (void)play;
+- (void)stop;
 
 @end

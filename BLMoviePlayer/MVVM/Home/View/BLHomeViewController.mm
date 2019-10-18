@@ -7,12 +7,19 @@
 //
 
 #import "BLHomeViewController.h"
-#include "BLFileDecoder.hpp"
+#include "BLMovieController.hpp"
+#import "BLAudioOutput.h"
 
-@interface BLHomeViewController ()
+@interface BLHomeViewController () <BLAudioOutputDelegate> {
+    BLMovieController *controller;
+}
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPlay;
 @property (weak, nonatomic) IBOutlet UIButton *btnStop;
+
+@property (nonatomic, strong) BLAudioOutput *output;
+
+@property (nonatomic, strong) NSInputStream *iStream;
 
 @end
 
@@ -23,13 +30,14 @@
     // Do any additional setup after loading the view.
     [self registRACsignal];
     
-    BLFileDecoder *decoder = new BLFileDecoder();
-    decoder->init([[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"aac"] UTF8String], 0);
-    BLFilePacketList *pktList = decoder->decodePacket();
-    while (pktList->length() > 0) {
-        BLFilePacket *pkt = pktList->popPacket();
-        NSLog(@"...pkt size...%d", pkt->size);
-    }
+    const char *filepath = [[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"aac"] UTF8String];
+    
+    controller = new BLMovieController();
+    controller->init(filepath, 0.2);
+    
+    _output = [[BLAudioOutput alloc] initWithSampleRate:controller->accompanySampleRate * 1.0f channels:controller->accompanyChannels delegate:self];
+    
+//    _iStream = [NSInputStream inputStreamWithFileAtPath:[[NSBundle mainBundle] pathForResource:@"pcm" ofType:@"aac"]];
 }
 
 - (void)registRACsignal
@@ -39,10 +47,12 @@
     @weakify(self)
     [[_btnPlay rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         @strongify(self);
+        [self.output play];
     }];
     
     [[_btnStop rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         @strongify(self);
+        [self.output stop];
     }];
 }
 
@@ -55,5 +65,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)readSamples:(short *)samples withNumberFrame:(UInt32)numberFrame channels:(UInt32)channels {
+    memset(samples, 0, numberFrame * channels * sizeof(SInt16));
+//    [_iStream read:(uint8_t *)samples maxLength:numberFrame * channels * 2];
+    controller->readSamples(samples, numberFrame * channels);
+}
+
 
 @end

@@ -40,14 +40,14 @@ struct BLFilePacket {
 };
 
 struct BLAudioPacket : BLFilePacket {
-    byte* data;
+    short* data;
     BLAudioPacket() {
         modelPacket = BLModelPacketAudio;
         data        = NULL;
     }
     ~BLAudioPacket() {
-        if (data) {
-            delete data;
+        if (NULL != data) {
+//            delete data;
             data = NULL;
         }
     }

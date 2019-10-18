@@ -44,6 +44,7 @@
 		7CE92797235367FE00C39DE9 /* BLFilePacketList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CE92795235367FE00C39DE9 /* BLFilePacketList.cpp */; };
 		7CE9279A2353680C00C39DE9 /* BLFileQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CE927982353680C00C39DE9 /* BLFileQueue.cpp */; };
 		7E19B571B8D85D09453763D9 /* libPods-BLMoviePlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EC832D0083D223F3602C6C /* libPods-BLMoviePlayer.a */; };
+		F446F4DE235568DC00C8545D /* BLMovieController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F446F4DC235568DC00C8545D /* BLMovieController.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -222,6 +223,8 @@
 		7CE927992353680C00C39DE9 /* BLFileQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BLFileQueue.hpp; sourceTree = "<group>"; };
 		85EC832D0083D223F3602C6C /* libPods-BLMoviePlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BLMoviePlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91A0EBD182D5FB5E6CBB75AE /* Pods-BLMoviePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLMoviePlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLMoviePlayer/Pods-BLMoviePlayer.release.xcconfig"; sourceTree = "<group>"; };
+		F446F4DC235568DC00C8545D /* BLMovieController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BLMovieController.cpp; sourceTree = "<group>"; };
+		F446F4DD235568DC00C8545D /* BLMovieController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BLMovieController.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -703,6 +706,7 @@
 		7CE92785235366D000C39DE9 /* BLFileDecode */ = {
 			isa = PBXGroup;
 			children = (
+				F446F4DB235568C200C8545D /* FileController */,
 				7CE92791235367B700C39DE9 /* FileQueue */,
 				7CE92790235367B000C39DE9 /* FilePacket */,
 				7CE9278F2353679200C39DE9 /* FileDecoder */,
@@ -735,6 +739,15 @@
 				7CE927992353680C00C39DE9 /* BLFileQueue.hpp */,
 			);
 			path = FileQueue;
+			sourceTree = "<group>";
+		};
+		F446F4DB235568C200C8545D /* FileController */ = {
+			isa = PBXGroup;
+			children = (
+				F446F4DC235568DC00C8545D /* BLMovieController.cpp */,
+				F446F4DD235568DC00C8545D /* BLMovieController.hpp */,
+			);
+			path = FileController;
 			sourceTree = "<group>";
 		};
 		FBF0831416324F16FB8B4580 /* Frameworks */ = {
@@ -869,6 +882,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F446F4DE235568DC00C8545D /* BLMovieController.cpp in Sources */,
 				7CE9278E2353678C00C39DE9 /* BLVideoOutput.m in Sources */,
 				7C4A6AE922F9C42C00BEACA8 /* BLHomeViewController.mm in Sources */,
 				7C4A6ADA22F9C42C00BEACA8 /* main.m in Sources */,

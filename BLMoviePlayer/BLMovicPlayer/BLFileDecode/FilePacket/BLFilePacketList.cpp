@@ -24,7 +24,7 @@ int BLFilePacketList::addPacket(BLFilePacket* filePacket) {
     if (first == NULL) {
         first = filePacket;
     } else {
-        first->next = filePacket;
+        last->next = filePacket;
     }
     last  = filePacket;
     len ++;

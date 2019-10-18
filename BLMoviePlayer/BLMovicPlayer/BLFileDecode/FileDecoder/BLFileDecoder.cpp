@@ -232,7 +232,7 @@ BLAudioPacket* BLFileDecoder::decodeAudioPacket() {
     
     BLAudioPacket* packet = new BLAudioPacket();
     packet->size = numberFrames * numberChannels;
-    packet->data = (byte *)audioData;
+    packet->data = (short *)audioData;
     packet->timebase = audioTimeBase;
     return packet;
 }

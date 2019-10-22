@@ -28,7 +28,7 @@
     AudioUnit ioUnit;
     AudioUnit cvtUnit;
     
-    short *sampleBuffer;
+    SInt16 *sampleBuffer;
     
 }
 
@@ -76,7 +76,7 @@
 }
 
 - (void)setupBuffer {
-    sampleBuffer = (short *)malloc(1024*10*4);
+    sampleBuffer = (SInt16 *)calloc(8192, sizeof(SInt16));
 }
 
 - (void)setupAUGraph {
@@ -122,6 +122,7 @@
     
     UInt32 bytePerFrame = sizeof(SInt16);
     AudioStreamBasicDescription inputFormat;
+    bzero(&inputFormat, sizeof(inputFormat));
     memset(&inputFormat, 0, sizeof(AudioStreamBasicDescription));
     inputFormat.mFormatID            = kAudioFormatLinearPCM;
     inputFormat.mSampleRate          = _sampleRate;
@@ -138,11 +139,12 @@
 }
 
 - (AudioStreamBasicDescription)outputFormat {
-    UInt32 bytePerFrame = sizeof(SInt16);
+    UInt32 bytePerFrame = sizeof(Float32);
     AudioStreamBasicDescription format;
+    bzero(&format, sizeof(format));
     format.mFormatID            = kAudioFormatLinearPCM;
     format.mSampleRate          = _sampleRate;
-    format.mFormatFlags         = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsNonInterleaved;
+    format.mFormatFlags         = kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
     format.mFramesPerPacket     = 1;
     format.mChannelsPerFrame    = _channels;
     format.mBitsPerChannel      = 8 * bytePerFrame;
@@ -166,7 +168,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(readSamples:withNumberFrame:channels:)]) {
         [_delegate readSamples:sampleBuffer withNumberFrame:numberFrame channels:_channels];
         for (int i = 0; i < mBuffer; i ++) {
-            memcpy(ioData->mBuffers[i].mData, sampleBuffer, ioData->mBuffers[i].mDataByteSize);
+            memcpy((SInt16 *)ioData->mBuffers[i].mData, sampleBuffer, ioData->mBuffers[i].mDataByteSize);
         }
     }
     

@@ -29,7 +29,8 @@ class BLFileDecoder {
     
     AVCodecContext* videoCodecContext; // 视频编解码上下文
     SwsContext* videoSwsContext;       // 视频转码上下文
-    AVPicture* videoPicture;           // 视频帧对象
+    AVFrame* videoFrame;               // 音频帧对象
+    AVPicture videoPicture;           // 视频帧对象
     
     void* swrBuffer;    // 音频转码缓存
     int audioIndex;     // 音频流索引
@@ -38,11 +39,13 @@ class BLFileDecoder {
     
     int videoIndex;     // 视频流索引
     double videoTimeBase;  // 视频时间基数
+    bool isVaildPicture;
     
     int packetBufferSize;
     
     int init(const char* filePath);
-    int audioCodecIsSupport();
+    bool audioCodecIsSupport();
+    bool videoCodecIsSupport();
     void readFrame(BLFilePacketList* pktList);
     
     BLAudioPacket* decodeAudioPacket();

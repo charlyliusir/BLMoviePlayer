@@ -17,7 +17,6 @@ BLFileDecoder::BLFileDecoder() {
     swrBuffer         = NULL;
     videoCodecContext = NULL;
     videoSwsContext   = NULL;
-    videoPicture      = NULL;
     
     audioIndex      = -1;
     swrBufferSize   = 0;
@@ -64,7 +63,8 @@ int BLFileDecoder::init(const char* filePath) {
         return -1;
     }
     // 3. 查找所有的数据流
-    fmtContext->max_analyze_duration = 50000;
+    fmtContext->probesize = 1000 * 1024;
+    fmtContext->max_analyze_duration = 10 * AV_TIME_BASE;
     if (avformat_find_stream_info(fmtContext, NULL) < 0) {
         printf("[ERROR] find file stream info error\n");
         return -1;
@@ -148,12 +148,35 @@ int BLFileDecoder::init(const char* filePath) {
         } else if (videoCodecContext->time_base.den && videoCodecContext->time_base.num) {
             videoTimeBase = av_q2d(audioCodecContext->time_base);
         }
+        if (avcodec_open2(videoCodecContext, videoCodec, NULL) < 0) {
+            printf("[ERROR]打开视频解码器失败\n");
+            return -1;
+        }
+        if (!videoCodecIsSupport()) {
+            AVPixelFormat dstFormat = AV_PIX_FMT_YUV420P;
+            int dstW = videoCodecContext->width;
+            int dstH = videoCodecContext->height;
+            isVaildPicture = avpicture_alloc(&videoPicture, dstFormat, dstW, dstH) == 0;
+            if (!isVaildPicture) {
+                printf("创建视频重采样失败\n");
+                return -1;
+            }
+            int srcW = dstW;
+            int srcH = dstH;
+            AVPixelFormat srcFormat = videoCodecContext->pix_fmt;
+            videoSwsContext = sws_getCachedContext(videoSwsContext, srcW, srcH, srcFormat, dstW, dstH, dstFormat, SWS_FAST_BILINEAR, NULL, NULL, NULL);
+        }
+        videoFrame = av_frame_alloc();
     }
-    return -1;
+    return 1;
 }
 
-int BLFileDecoder::audioCodecIsSupport() {
+bool BLFileDecoder::audioCodecIsSupport() {
     return audioCodecContext->sample_fmt == AV_SAMPLE_FMT_S16;
+}
+
+bool BLFileDecoder::videoCodecIsSupport() {
+    return videoCodecContext->pix_fmt == AV_PIX_FMT_YUV420P || videoCodecContext->pix_fmt == AV_PIX_FMT_YUVJ422P;
 }
 
 BLFilePacketList* BLFileDecoder::decodePacket() {
@@ -174,11 +197,18 @@ void BLFileDecoder::readFrame(BLFilePacketList* pktList) {
                 printf("\n");
                 continue;
             }
-            while (avcodec_receive_frame(audioCodecContext, audioFrame) == 0) {
+            int errCode = 0;
+            char *buf = (char *)malloc(1024);
+            while ((errCode = avcodec_receive_frame(audioCodecContext, audioFrame)) == 0) {
                 BLAudioPacket* audioPkt = decodeAudioPacket();
                 if (audioPkt) {
                     pktList->addPacket(audioPkt);
                 }
+            }
+            if (errCode != 0) {
+                av_strerror(errCode, buf, 1024);
+                printf("ERROR: %s=:>%d\n", buf, errCode);
+                continue;
             }
             break;
         } else if (packet->stream_index == videoIndex) {
@@ -186,7 +216,7 @@ void BLFileDecoder::readFrame(BLFilePacketList* pktList) {
                 printf("\n");
                 continue;
             }
-            while (avcodec_receive_frame(audioCodecContext, audioFrame) == 0) {
+            while (avcodec_receive_frame(audioCodecContext, videoFrame) == 0) {
                 BLVideoPacket* videoPkt = decodeVideoPacket();
                 if (videoPkt) {
                     pktList->addPacket(videoPkt);
@@ -230,14 +260,23 @@ BLAudioPacket* BLFileDecoder::decodeAudioPacket() {
         audioData    = audioFrame->data[0];
     }
     
+    // 音频杂音处理, 由于开始没有做copy工作, 导致出现杂音
+    short *data = (short *)malloc(numberChannels * numberFrames * sizeof(short));
+    memcpy(data, audioData, numberChannels * numberFrames * sizeof(short));
     BLAudioPacket* packet = new BLAudioPacket();
     packet->size = numberFrames * numberChannels;
-    packet->data = (short *)audioData;
+    packet->data = data;
     packet->timebase = audioTimeBase;
     return packet;
 }
 
 BLVideoPacket* BLFileDecoder::decodeVideoPacket() {
+    if (isVaildPicture) {
+        sws_scale(videoSwsContext, videoFrame->data, videoFrame->linesize, 0, videoCodecContext->height, videoPicture.data, videoPicture.linesize);
+        
+    } else {
+        
+    }
     return NULL;
 }
 
@@ -257,10 +296,6 @@ void BLFileDecoder::destory() {
     if (audioFrame) {
         av_free(audioFrame);
         audioFrame = NULL;
-    }
-    if (videoPicture) {
-        av_free(videoPicture);
-        videoPicture = NULL;
     }
     if (audioCodecContext) {
         avcodec_close(audioCodecContext);

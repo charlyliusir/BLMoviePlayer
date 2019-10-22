@@ -24,7 +24,6 @@
 		7C4A6AE822F9C42C00BEACA8 /* BLHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC122F9C42C00BEACA8 /* BLHomeViewModel.m */; };
 		7C4A6AE922F9C42C00BEACA8 /* BLHomeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC322F9C42C00BEACA8 /* BLHomeViewController.mm */; };
 		7C4A6AEA22F9C42C00BEACA8 /* abc.aac in Resources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC622F9C42C00BEACA8 /* abc.aac */; };
-		7C4A6AEB22F9C42C00BEACA8 /* abc.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC722F9C42C00BEACA8 /* abc.m4a */; };
 		7C4A6AEC22F9C42C00BEACA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC822F9C42C00BEACA8 /* Assets.xcassets */; };
 		7C4A6AED22F9C42C00BEACA8 /* test.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 7C4A6AC922F9C42C00BEACA8 /* test.pcm */; };
 		7C4A6AEE22F9C42C00BEACA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C4A6ACA22F9C42C00BEACA8 /* LaunchScreen.storyboard */; };
@@ -45,6 +44,11 @@
 		7CE9279A2353680C00C39DE9 /* BLFileQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CE927982353680C00C39DE9 /* BLFileQueue.cpp */; };
 		7E19B571B8D85D09453763D9 /* libPods-BLMoviePlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EC832D0083D223F3602C6C /* libPods-BLMoviePlayer.a */; };
 		F446F4DE235568DC00C8545D /* BLMovieController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F446F4DC235568DC00C8545D /* BLMovieController.cpp */; };
+		F4AEA386235EF397009C60CF /* abc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA383235EF397009C60CF /* abc.mp4 */; };
+		F4AEA387235EF397009C60CF /* test.flv in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA384235EF397009C60CF /* test.flv */; };
+		F4AEA388235EF397009C60CF /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA385235EF397009C60CF /* test.mov */; };
+		F4AEA392235F034F009C60CF /* 1.mov in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA391235F034F009C60CF /* 1.mov */; };
+		F4AEA394235F0371009C60CF /* abc.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA393235F0371009C60CF /* abc.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,7 +197,6 @@
 		7C4A6AC322F9C42C00BEACA8 /* BLHomeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BLHomeViewController.mm; sourceTree = "<group>"; };
 		7C4A6AC422F9C42C00BEACA8 /* BLHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLHomeViewController.h; sourceTree = "<group>"; };
 		7C4A6AC622F9C42C00BEACA8 /* abc.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = abc.aac; sourceTree = "<group>"; };
-		7C4A6AC722F9C42C00BEACA8 /* abc.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = abc.m4a; sourceTree = "<group>"; };
 		7C4A6AC822F9C42C00BEACA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C4A6AC922F9C42C00BEACA8 /* test.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.pcm; sourceTree = "<group>"; };
 		7C4A6ACB22F9C42C00BEACA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -225,6 +228,11 @@
 		91A0EBD182D5FB5E6CBB75AE /* Pods-BLMoviePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLMoviePlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLMoviePlayer/Pods-BLMoviePlayer.release.xcconfig"; sourceTree = "<group>"; };
 		F446F4DC235568DC00C8545D /* BLMovieController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BLMovieController.cpp; sourceTree = "<group>"; };
 		F446F4DD235568DC00C8545D /* BLMovieController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BLMovieController.hpp; sourceTree = "<group>"; };
+		F4AEA383235EF397009C60CF /* abc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = abc.mp4; path = "../../../FFMpeg+OpenGLES/Projects/VideoStu/iOS-video_player_pro/video_player_pro/resource/abc.mp4"; sourceTree = "<group>"; };
+		F4AEA384235EF397009C60CF /* test.flv */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.flv; path = "../../../FFMpeg+OpenGLES/Projects/VideoStu/iOS-video_player_pro/video_player_pro/resource/test.flv"; sourceTree = "<group>"; };
+		F4AEA385235EF397009C60CF /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = test.mov; path = "../../../FFMpeg+OpenGLES/Projects/VideoStu/iOS-video_player_pro/video_player_pro/resource/test.mov"; sourceTree = "<group>"; };
+		F4AEA391235F034F009C60CF /* 1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 1.mov; sourceTree = "<group>"; };
+		F4AEA393235F0371009C60CF /* abc.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = abc.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -663,8 +671,12 @@
 		7C4A6AC522F9C42C00BEACA8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F4AEA393235F0371009C60CF /* abc.m4a */,
+				F4AEA391235F034F009C60CF /* 1.mov */,
+				F4AEA383235EF397009C60CF /* abc.mp4 */,
+				F4AEA384235EF397009C60CF /* test.flv */,
+				F4AEA385235EF397009C60CF /* test.mov */,
 				7C4A6AC622F9C42C00BEACA8 /* abc.aac */,
-				7C4A6AC722F9C42C00BEACA8 /* abc.m4a */,
 				7C4A6AC822F9C42C00BEACA8 /* Assets.xcassets */,
 				7C4A6AC922F9C42C00BEACA8 /* test.pcm */,
 				7C4A6ACA22F9C42C00BEACA8 /* LaunchScreen.storyboard */,
@@ -823,14 +835,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4AEA388235EF397009C60CF /* test.mov in Resources */,
+				F4AEA386235EF397009C60CF /* abc.mp4 in Resources */,
 				7C4A6AEE22F9C42C00BEACA8 /* LaunchScreen.storyboard in Resources */,
 				7C4A6AEF22F9C42C00BEACA8 /* Main.storyboard in Resources */,
+				F4AEA392235F034F009C60CF /* 1.mov in Resources */,
 				7C4A6AF222F9C42C00BEACA8 /* 131.aac in Resources */,
+				F4AEA387235EF397009C60CF /* test.flv in Resources */,
 				7C4A6ADB22F9C42C00BEACA8 /* Info.plist in Resources */,
 				7C4A6AF122F9C42C00BEACA8 /* abc.mp3 in Resources */,
 				7C4A6AF022F9C42C00BEACA8 /* abc.pcm in Resources */,
-				7C4A6AEB22F9C42C00BEACA8 /* abc.m4a in Resources */,
 				7C4A6AEC22F9C42C00BEACA8 /* Assets.xcassets in Resources */,
+				F4AEA394235F0371009C60CF /* abc.m4a in Resources */,
 				7C4A6AEA22F9C42C00BEACA8 /* abc.aac in Resources */,
 				7C4A6AED22F9C42C00BEACA8 /* test.pcm in Resources */,
 			);

@@ -16,7 +16,7 @@
 #define MAX(a, b) ((a)>(b))?(a):(b)
 
 BLMovieController::BLMovieController() {
-    
+    audioPacketCrosor = 0;
 }
 
 BLMovieController::~BLMovieController() {

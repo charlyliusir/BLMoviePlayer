@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view.
     [self registRACsignal];
     
-    const char *filepath = [[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"aac"] UTF8String];
+    const char *filepath = [[[NSBundle mainBundle] pathForResource:@"test" ofType:@"flv"] UTF8String];
     
     controller = new BLMovieController();
     controller->init(filepath, 0.2);

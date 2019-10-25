@@ -10,6 +10,7 @@
 #define BLFilePacketList_hpp
 
 #include <stdio.h>
+#include <stdint.h>
 
 #define byte int16_t
 
@@ -23,7 +24,10 @@ enum BLModelPacket {
 struct BLFilePacket {
     BLModelPacket modelPacket;  // 数据类型
     int size;                   // 数据大小
-    int position;               //
+    int width;
+    int height;
+    int linesize;
+    float position;               //
     int timebase;               // 时间基数
     BLFilePacket* next;
     
@@ -54,27 +58,27 @@ struct BLAudioPacket : BLFilePacket {
 };
 
 struct BLVideoPacket : BLFilePacket {
-    byte* y_data;
-    byte* u_data;
-    byte* v_data;
+    uint8_t* luma;
+    uint8_t* chromaR;
+    uint8_t* chromaB;
     BLVideoPacket() {
         modelPacket = BLModelPacketVideo;
-        y_data      = NULL;
-        u_data      = NULL;
-        v_data      = NULL;
+        luma      = NULL;
+        chromaR      = NULL;
+        chromaB      = NULL;
     }
     ~BLVideoPacket() {
-        if (y_data) {
-            delete y_data;
-            y_data = NULL;
+        if (luma) {
+            delete luma;
+            luma = NULL;
         }
-        if (u_data) {
-            delete u_data;
-            u_data = NULL;
+        if (chromaR) {
+            delete chromaR;
+            chromaR = NULL;
         }
-        if (v_data) {
-            delete v_data;
-            v_data = NULL;
+        if (chromaB) {
+            delete chromaB;
+            chromaB = NULL;
         }
     }
 };

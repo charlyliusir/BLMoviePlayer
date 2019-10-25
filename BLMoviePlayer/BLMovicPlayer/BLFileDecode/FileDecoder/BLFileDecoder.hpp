@@ -17,6 +17,7 @@ extern "C" {
     #include <libavcodec/avcodec.h>
     #include <libswresample/swresample.h>
     #include <libswscale/swscale.h>
+#include <libavutil/imgutils.h>
 }
 
 class BLFileDecoder {
@@ -30,7 +31,7 @@ class BLFileDecoder {
     AVCodecContext* videoCodecContext; // 视频编解码上下文
     SwsContext* videoSwsContext;       // 视频转码上下文
     AVFrame* videoFrame;               // 音频帧对象
-    AVPicture videoPicture;           // 视频帧对象
+    AVFrame* yuvFrame;           // 视频帧对象
     
     void* swrBuffer;    // 音频转码缓存
     int audioIndex;     // 音频流索引
@@ -47,6 +48,7 @@ class BLFileDecoder {
     bool audioCodecIsSupport();
     bool videoCodecIsSupport();
     void readFrame(BLFilePacketList* pktList);
+    void copyBufferData(uint8_t *srcData, uint8_t *dstData, int linesize, int width, int height);
     
     BLAudioPacket* decodeAudioPacket();
     BLVideoPacket* decodeVideoPacket();
@@ -58,6 +60,20 @@ public:
     int getMusicMeta(const char* filePath, int *metaData);
     int init(const char *filePath, int pktSize);
     BLFilePacketList* decodePacket();
+    
+    int vWidth() {
+        if (videoCodecContext) {
+            return videoCodecContext->width;
+        }
+        return 0;
+    }
+    
+    int vHeight() {
+        if (videoCodecContext) {
+            return videoCodecContext->height;
+        }
+        return 0;
+    }
     
     void destory();
 };

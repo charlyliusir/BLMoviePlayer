@@ -38,12 +38,17 @@
 		7C4A6AFC22F9C4E500BEACA8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4A6AFB22F9C4E500BEACA8 /* VideoToolbox.framework */; };
 		7CE927882353677800C39DE9 /* BLAudioSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE927872353677800C39DE9 /* BLAudioSession.m */; };
 		7CE9278B2353678100C39DE9 /* BLAudioOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9278A2353678100C39DE9 /* BLAudioOutput.m */; };
-		7CE9278E2353678C00C39DE9 /* BLVideoOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9278D2353678C00C39DE9 /* BLVideoOutput.m */; };
 		7CE92794235367DF00C39DE9 /* BLFileDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CE92792235367DF00C39DE9 /* BLFileDecoder.cpp */; };
 		7CE92797235367FE00C39DE9 /* BLFilePacketList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CE92795235367FE00C39DE9 /* BLFilePacketList.cpp */; };
 		7CE9279A2353680C00C39DE9 /* BLFileQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CE927982353680C00C39DE9 /* BLFileQueue.cpp */; };
 		7E19B571B8D85D09453763D9 /* libPods-BLMoviePlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EC832D0083D223F3602C6C /* libPods-BLMoviePlayer.a */; };
 		F446F4DE235568DC00C8545D /* BLMovieController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F446F4DC235568DC00C8545D /* BLMovieController.cpp */; };
+		F46E6927236046ED00B4C19F /* DirectPassRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = F46E691A236046ED00B4C19F /* DirectPassRenderer.m */; };
+		F46E6928236046ED00B4C19F /* YUVFrameCopier.mm in Sources */ = {isa = PBXBuildFile; fileRef = F46E691F236046ED00B4C19F /* YUVFrameCopier.mm */; };
+		F46E6929236046ED00B4C19F /* BaseEffectFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F46E6920236046ED00B4C19F /* BaseEffectFilter.m */; };
+		F46E692A236046ED00B4C19F /* ContrastEnhancerFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F46E6922236046ED00B4C19F /* ContrastEnhancerFilter.m */; };
+		F46E692B236046ED00B4C19F /* VideoOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = F46E6924236046ED00B4C19F /* VideoOutput.mm */; };
+		F46E692C236046ED00B4C19F /* BLVideoOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = F46E6925236046ED00B4C19F /* BLVideoOutput.m */; };
 		F4AEA386235EF397009C60CF /* abc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA383235EF397009C60CF /* abc.mp4 */; };
 		F4AEA387235EF397009C60CF /* test.flv in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA384235EF397009C60CF /* test.flv */; };
 		F4AEA388235EF397009C60CF /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA385235EF397009C60CF /* test.mov */; };
@@ -216,8 +221,6 @@
 		7CE927872353677800C39DE9 /* BLAudioSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLAudioSession.m; sourceTree = "<group>"; };
 		7CE927892353678100C39DE9 /* BLAudioOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLAudioOutput.h; sourceTree = "<group>"; };
 		7CE9278A2353678100C39DE9 /* BLAudioOutput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLAudioOutput.m; sourceTree = "<group>"; };
-		7CE9278C2353678C00C39DE9 /* BLVideoOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLVideoOutput.h; sourceTree = "<group>"; };
-		7CE9278D2353678C00C39DE9 /* BLVideoOutput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLVideoOutput.m; sourceTree = "<group>"; };
 		7CE92792235367DF00C39DE9 /* BLFileDecoder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BLFileDecoder.cpp; sourceTree = "<group>"; };
 		7CE92793235367DF00C39DE9 /* BLFileDecoder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BLFileDecoder.hpp; sourceTree = "<group>"; };
 		7CE92795235367FE00C39DE9 /* BLFilePacketList.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BLFilePacketList.cpp; sourceTree = "<group>"; };
@@ -228,6 +231,18 @@
 		91A0EBD182D5FB5E6CBB75AE /* Pods-BLMoviePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLMoviePlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLMoviePlayer/Pods-BLMoviePlayer.release.xcconfig"; sourceTree = "<group>"; };
 		F446F4DC235568DC00C8545D /* BLMovieController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BLMovieController.cpp; sourceTree = "<group>"; };
 		F446F4DD235568DC00C8545D /* BLMovieController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BLMovieController.hpp; sourceTree = "<group>"; };
+		F46E6918236046ED00B4C19F /* BLVideoOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLVideoOutput.h; sourceTree = "<group>"; };
+		F46E691A236046ED00B4C19F /* DirectPassRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectPassRenderer.m; sourceTree = "<group>"; };
+		F46E691B236046ED00B4C19F /* BaseEffectFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEffectFilter.h; sourceTree = "<group>"; };
+		F46E691C236046ED00B4C19F /* DirectPassRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectPassRenderer.h; sourceTree = "<group>"; };
+		F46E691E236046ED00B4C19F /* YUVFrameCopier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUVFrameCopier.h; sourceTree = "<group>"; };
+		F46E691F236046ED00B4C19F /* YUVFrameCopier.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YUVFrameCopier.mm; sourceTree = "<group>"; };
+		F46E6920236046ED00B4C19F /* BaseEffectFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEffectFilter.m; sourceTree = "<group>"; };
+		F46E6922236046ED00B4C19F /* ContrastEnhancerFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContrastEnhancerFilter.m; sourceTree = "<group>"; };
+		F46E6923236046ED00B4C19F /* ContrastEnhancerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContrastEnhancerFilter.h; sourceTree = "<group>"; };
+		F46E6924236046ED00B4C19F /* VideoOutput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoOutput.mm; sourceTree = "<group>"; };
+		F46E6925236046ED00B4C19F /* BLVideoOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLVideoOutput.m; sourceTree = "<group>"; };
+		F46E6926236046ED00B4C19F /* VideoOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoOutput.h; sourceTree = "<group>"; };
 		F4AEA383235EF397009C60CF /* abc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = abc.mp4; path = "../../../FFMpeg+OpenGLES/Projects/VideoStu/iOS-video_player_pro/video_player_pro/resource/abc.mp4"; sourceTree = "<group>"; };
 		F4AEA384235EF397009C60CF /* test.flv */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.flv; path = "../../../FFMpeg+OpenGLES/Projects/VideoStu/iOS-video_player_pro/video_player_pro/resource/test.flv"; sourceTree = "<group>"; };
 		F4AEA385235EF397009C60CF /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = test.mov; path = "../../../FFMpeg+OpenGLES/Projects/VideoStu/iOS-video_player_pro/video_player_pro/resource/test.mov"; sourceTree = "<group>"; };
@@ -616,7 +631,7 @@
 			children = (
 				7CE92784235366C600C39DE9 /* BLAudioSession */,
 				7CE92783235366BC00C39DE9 /* BLAudioOutput */,
-				7CE92782235366AF00C39DE9 /* BLVideoOutput */,
+				F46E6917236046ED00B4C19F /* VideoOutput */,
 				7CE92785235366D000C39DE9 /* BLFileDecode */,
 			);
 			path = BLMovicPlayer;
@@ -688,15 +703,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		7CE92782235366AF00C39DE9 /* BLVideoOutput */ = {
-			isa = PBXGroup;
-			children = (
-				7CE9278C2353678C00C39DE9 /* BLVideoOutput.h */,
-				7CE9278D2353678C00C39DE9 /* BLVideoOutput.m */,
-			);
-			path = BLVideoOutput;
-			sourceTree = "<group>";
-		};
 		7CE92783235366BC00C39DE9 /* BLAudioOutput */ = {
 			isa = PBXGroup;
 			children = (
@@ -760,6 +766,50 @@
 				F446F4DD235568DC00C8545D /* BLMovieController.hpp */,
 			);
 			path = FileController;
+			sourceTree = "<group>";
+		};
+		F46E6917236046ED00B4C19F /* VideoOutput */ = {
+			isa = PBXGroup;
+			children = (
+				F46E6919236046ED00B4C19F /* render */,
+				F46E6918236046ED00B4C19F /* BLVideoOutput.h */,
+				F46E6925236046ED00B4C19F /* BLVideoOutput.m */,
+				F46E6926236046ED00B4C19F /* VideoOutput.h */,
+				F46E6924236046ED00B4C19F /* VideoOutput.mm */,
+			);
+			name = VideoOutput;
+			path = BLMoviePlayer/BLMovicPlayer/VideoOutput;
+			sourceTree = SOURCE_ROOT;
+		};
+		F46E6919236046ED00B4C19F /* render */ = {
+			isa = PBXGroup;
+			children = (
+				F46E691D236046ED00B4C19F /* copier */,
+				F46E6921236046ED00B4C19F /* filter */,
+				F46E691B236046ED00B4C19F /* BaseEffectFilter.h */,
+				F46E6920236046ED00B4C19F /* BaseEffectFilter.m */,
+				F46E691C236046ED00B4C19F /* DirectPassRenderer.h */,
+				F46E691A236046ED00B4C19F /* DirectPassRenderer.m */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
+		F46E691D236046ED00B4C19F /* copier */ = {
+			isa = PBXGroup;
+			children = (
+				F46E691E236046ED00B4C19F /* YUVFrameCopier.h */,
+				F46E691F236046ED00B4C19F /* YUVFrameCopier.mm */,
+			);
+			path = copier;
+			sourceTree = "<group>";
+		};
+		F46E6921236046ED00B4C19F /* filter */ = {
+			isa = PBXGroup;
+			children = (
+				F46E6922236046ED00B4C19F /* ContrastEnhancerFilter.m */,
+				F46E6923236046ED00B4C19F /* ContrastEnhancerFilter.h */,
+			);
+			path = filter;
 			sourceTree = "<group>";
 		};
 		FBF0831416324F16FB8B4580 /* Frameworks */ = {
@@ -898,20 +948,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F46E692C236046ED00B4C19F /* BLVideoOutput.m in Sources */,
 				F446F4DE235568DC00C8545D /* BLMovieController.cpp in Sources */,
-				7CE9278E2353678C00C39DE9 /* BLVideoOutput.m in Sources */,
 				7C4A6AE922F9C42C00BEACA8 /* BLHomeViewController.mm in Sources */,
+				F46E692B236046ED00B4C19F /* VideoOutput.mm in Sources */,
+				F46E6927236046ED00B4C19F /* DirectPassRenderer.m in Sources */,
 				7C4A6ADA22F9C42C00BEACA8 /* main.m in Sources */,
 				7CE9278B2353678100C39DE9 /* BLAudioOutput.m in Sources */,
 				7C4A6AD922F9C42C00BEACA8 /* AppDelegate.m in Sources */,
 				7C4A6AE722F9C42C00BEACA8 /* BLBaseViewModel.m in Sources */,
 				7C4A6AE622F9C42C00BEACA8 /* BLBaseViewController.m in Sources */,
 				7C4A6ADC22F9C42C00BEACA8 /* NSString+Empty.m in Sources */,
+				F46E6928236046ED00B4C19F /* YUVFrameCopier.mm in Sources */,
+				F46E692A236046ED00B4C19F /* ContrastEnhancerFilter.m in Sources */,
 				7CE92794235367DF00C39DE9 /* BLFileDecoder.cpp in Sources */,
 				7C4A6AE822F9C42C00BEACA8 /* BLHomeViewModel.m in Sources */,
 				7CE927882353677800C39DE9 /* BLAudioSession.m in Sources */,
 				7CE9279A2353680C00C39DE9 /* BLFileQueue.cpp in Sources */,
 				7CE92797235367FE00C39DE9 /* BLFilePacketList.cpp in Sources */,
+				F46E6929236046ED00B4C19F /* BaseEffectFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

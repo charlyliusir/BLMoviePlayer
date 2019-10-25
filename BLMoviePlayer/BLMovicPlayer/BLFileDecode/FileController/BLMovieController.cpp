@@ -17,6 +17,7 @@
 
 BLMovieController::BLMovieController() {
     audioPacketCrosor = 0;
+    currAudioPacket = NULL;
 }
 
 BLMovieController::~BLMovieController() {
@@ -95,6 +96,21 @@ int BLMovieController::readSamples(short *samples, int numberFrames) {
     return numberFrames - sampleSize;
 }
 
+BLVideoPacket *BLMovieController::getCurrentVideoPacket() {
+    BLVideoPacket *vPacket = NULL;
+    while (NULL == vPacket) {
+        BLVideoPacket *vPkt = (BLVideoPacket *)videoQueue->pop();
+        if (vPkt == NULL) {
+            break ;
+        }
+        if (vPkt->position >= 0.08) {
+            vPacket = vPkt;
+            break;
+        }
+    }
+    return vPacket;
+}
+
 void BLMovieController::setupDecoderThread() {
     pthread_create(&fileDecodeThread, NULL, startDecodeOnThread, (void *)this);
 }
@@ -102,11 +118,11 @@ void BLMovieController::setupDecoderThread() {
 void BLMovieController::decodeFile() {
     
     BLFilePacketList *pktList = decoder->decodePacket();
-    if (pktList->length() <= 0) {
-        isRuning = false;
-    }
     while (pktList->length() > 0) {
         BLFilePacket *pkt = pktList->popPacket();
+        if (pkt == NULL) {
+            break;
+        }
         if (pkt->modelPacket == BLModelPacketAudio) {
             audioQueue->push(pkt);
         } else {
@@ -118,7 +134,7 @@ void BLMovieController::decodeFile() {
 void *BLMovieController::startDecodeOnThread(void *ptr) {
     BLMovieController *controller = (BLMovieController *)ptr;
     while (controller->isRuning) {
-        if (controller->audioQueue->length() >= 40 || controller->videoQueue->length() >= 40) {
+        if (controller->audioQueue->length() >= 20 || controller->videoQueue->length() >= 20) {
             continue;
         }
         controller->decodeFile();

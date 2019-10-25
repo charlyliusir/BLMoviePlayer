@@ -24,6 +24,7 @@ BLFileDecoder::BLFileDecoder() {
     
     videoIndex      = -1;
     videoTimeBase   = 0;
+    isVaildPicture  = false;
 }
 
 BLFileDecoder::~BLFileDecoder() {
@@ -156,11 +157,26 @@ int BLFileDecoder::init(const char* filePath) {
             AVPixelFormat dstFormat = AV_PIX_FMT_YUV420P;
             int dstW = videoCodecContext->width;
             int dstH = videoCodecContext->height;
-            isVaildPicture = avpicture_alloc(&videoPicture, dstFormat, dstW, dstH) == 0;
+            
+            /// 旧版本
+//            isVaildPicture = avpicture_alloc(&videoPicture, dstFormat, dstW, dstH) == 0;
+//            if (!isVaildPicture) {
+//                printf("创建视频重采样失败\n");
+//                return -1;
+//            }
+            
+            /// 新版本
+            int yuvSize = av_image_get_buffer_size(dstFormat, dstW, dstH, 1);
+            uint8_t* outBuf = (uint8_t *)av_malloc(yuvSize);
+            yuvFrame = av_frame_alloc();
+            
+            isVaildPicture = av_image_fill_arrays(yuvFrame->data, yuvFrame->linesize, (const uint8_t*)outBuf, dstFormat, dstW, dstH, 1) != 0;
+            
             if (!isVaildPicture) {
-                printf("创建视频重采样失败\n");
+                printf("....\n");
                 return -1;
             }
+            
             int srcW = dstW;
             int srcH = dstH;
             AVPixelFormat srcFormat = videoCodecContext->pix_fmt;
@@ -186,7 +202,7 @@ BLFilePacketList* BLFileDecoder::decodePacket() {
 }
 
 void BLFileDecoder::readFrame(BLFilePacketList* pktList) {
-    packet = av_packet_alloc();
+    packet = (AVPacket *)av_malloc(sizeof(AVPacket));
     while (true) {
         if (av_read_frame(fmtContext, packet) < 0) {
             printf("End of file\n");
@@ -197,26 +213,21 @@ void BLFileDecoder::readFrame(BLFilePacketList* pktList) {
                 printf("\n");
                 continue;
             }
-            int errCode = 0;
-            char *buf = (char *)malloc(1024);
-            while ((errCode = avcodec_receive_frame(audioCodecContext, audioFrame)) == 0) {
+            while (avcodec_receive_frame(audioCodecContext, audioFrame) == 0) {
                 BLAudioPacket* audioPkt = decodeAudioPacket();
                 if (audioPkt) {
                     pktList->addPacket(audioPkt);
                 }
-            }
-            if (errCode != 0) {
-                av_strerror(errCode, buf, 1024);
-                printf("ERROR: %s=:>%d\n", buf, errCode);
-                continue;
+                
+//                av_strerror(<#int errnum#>, <#char *errbuf#>, <#size_t errbuf_size#>)
             }
             break;
         } else if (packet->stream_index == videoIndex) {
-            if (avcodec_send_packet(audioCodecContext, packet) != 0) {
+            if (avcodec_send_packet(videoCodecContext, packet) != 0) {
                 printf("\n");
                 continue;
             }
-            while (avcodec_receive_frame(audioCodecContext, videoFrame) == 0) {
+            while (avcodec_receive_frame(videoCodecContext, videoFrame) == 0) {
                 BLVideoPacket* videoPkt = decodeVideoPacket();
                 if (videoPkt) {
                     pktList->addPacket(videoPkt);
@@ -225,6 +236,7 @@ void BLFileDecoder::readFrame(BLFilePacketList* pktList) {
             break;
         }
     }
+    free(packet);
 }
 
 BLAudioPacket* BLFileDecoder::decodeAudioPacket() {
@@ -271,13 +283,36 @@ BLAudioPacket* BLFileDecoder::decodeAudioPacket() {
 }
 
 BLVideoPacket* BLFileDecoder::decodeVideoPacket() {
+    BLVideoPacket *vPacket = new BLVideoPacket();
+    int size = videoCodecContext->width * videoCodecContext->height;
+    vPacket->luma = (uint8_t *)av_malloc(size);
+    vPacket->chromaB = (uint8_t *)av_malloc(size / 4);
+    vPacket->chromaR = (uint8_t *)av_malloc(size / 4);
     if (isVaildPicture) {
-        sws_scale(videoSwsContext, videoFrame->data, videoFrame->linesize, 0, videoCodecContext->height, videoPicture.data, videoPicture.linesize);
-        
+        sws_scale(videoSwsContext, videoFrame->data, videoFrame->linesize, 0, videoCodecContext->height, yuvFrame->data, yuvFrame->linesize);
+        copyBufferData(yuvFrame->data[0], vPacket->luma, yuvFrame->linesize[0], videoCodecContext->width, videoCodecContext->height);
+        copyBufferData(yuvFrame->data[1], vPacket->chromaB, yuvFrame->linesize[1], videoCodecContext->width / 2, videoCodecContext->height / 2);
+        copyBufferData(yuvFrame->data[2], vPacket->chromaR, yuvFrame->linesize[2], videoCodecContext->width / 2, videoCodecContext->height / 2);
     } else {
-        
+        copyBufferData(videoFrame->data[0], vPacket->luma, videoFrame->linesize[0], videoCodecContext->width, videoCodecContext->height);
+        copyBufferData(videoFrame->data[1], vPacket->chromaB, videoFrame->linesize[1], videoCodecContext->width / 2, videoCodecContext->height / 2);
+        copyBufferData(videoFrame->data[2], vPacket->chromaR, videoFrame->linesize[2], videoCodecContext->width / 2, videoCodecContext->height / 2);
     }
-    return NULL;
+    vPacket->width = videoCodecContext->width;
+    vPacket->height = videoCodecContext->height;
+    vPacket->linesize = videoFrame->linesize[0];
+    vPacket->size = vPacket->width * vPacket->height;
+    vPacket->position = videoFrame->best_effort_timestamp * videoTimeBase;
+    return vPacket;
+}
+
+void BLFileDecoder::copyBufferData(uint8_t *srcData, uint8_t *dstData, int linesize, int width, int height) {
+    width = linesize < width ? linesize : width;
+    for (int i = 0; i < height; i ++) {
+        memcpy(dstData, srcData, width);
+        dstData += width;
+        srcData += linesize;
+    }
 }
 
 void BLFileDecoder::destory() {

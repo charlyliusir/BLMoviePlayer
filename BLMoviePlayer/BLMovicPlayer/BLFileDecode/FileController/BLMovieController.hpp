@@ -47,6 +47,21 @@ public:
     int init(const char *file, float packetBufferTimePercent);
     
     int readSamples(short *samples, int numberFrames);
+    BLVideoPacket *getCurrentVideoPacket();
+    
+    int vWidth() {
+        if (decoder) {
+            return decoder->vWidth();
+        }
+        return 0;
+    }
+    
+    int vHeight() {
+        if (decoder) {
+            return decoder->vHeight();
+        }
+        return 0;
+    }
     
     void destory();
 };

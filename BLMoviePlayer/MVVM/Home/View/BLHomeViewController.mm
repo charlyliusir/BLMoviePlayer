@@ -9,6 +9,7 @@
 #import "BLHomeViewController.h"
 #include "BLMovieController.hpp"
 #import "BLAudioOutput.h"
+#import "VideoOutput.h"
 
 @interface BLHomeViewController () <BLAudioOutputDelegate> {
     BLMovieController *controller;
@@ -18,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnStop;
 
 @property (nonatomic, strong) BLAudioOutput *output;
+@property (nonatomic, strong) VideoOutput *vOutput;
 
 @property (nonatomic, strong) NSInputStream *iStream;
 
@@ -36,6 +38,16 @@
     controller->init(filepath, 0.2);
     
     _output = [[BLAudioOutput alloc] initWithSampleRate:controller->accompanySampleRate * 1.0f channels:controller->accompanyChannels delegate:self];
+    
+    int tWidth = controller->vWidth();
+    int tHeight = controller->vHeight();
+    _vOutput = [[VideoOutput alloc] initWithFrame:self.view.bounds textureWidth:tWidth textureHeight:tHeight usingHWCodec:NO shareGroup:nil];
+    _vOutput.contentMode = UIViewContentModeScaleAspectFill;
+    _vOutput.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.view.backgroundColor = [UIColor clearColor];
+        [self.view insertSubview:self.vOutput atIndex:0];
+    });
     
 //    _iStream = [NSInputStream inputStreamWithFileAtPath:[[NSBundle mainBundle] pathForResource:@"pcm" ofType:@"aac"]];
 }
@@ -70,6 +82,10 @@
     memset(samples, 0, numberFrame * channels * sizeof(SInt16));
 //    [_iStream read:(uint8_t *)samples maxLength:numberFrame * channels * 2];
     controller->readSamples(samples, numberFrame * channels);
+    BLVideoPacket *vPacket = controller->getCurrentVideoPacket();
+    if (vPacket) {
+        [_vOutput presentVideoFrame:vPacket];
+    }
 }
 
 

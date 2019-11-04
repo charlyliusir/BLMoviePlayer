@@ -70,20 +70,20 @@ NSString *const yuvFragmentShaderString = SHADER_STRING
         glEnableVertexAttribArray(filterPositionAttribute);
         glEnableVertexAttribArray(filterTextureCoordinateAttribute);
         //生成FBO And TextureId
-        glGenFramebuffers(1, &_framebuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, _framebuffer);
-        
-        glActiveTexture(GL_TEXTURE1);
-        glGenTextures(1, &_outputTextureID);
-        glBindTexture(GL_TEXTURE_2D, _outputTextureID);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)frameWidth, (int)frameHeight, 0, GL_BGRA, GL_UNSIGNED_BYTE, 0);
-        NSLog(@"width=%d, height=%d", (int)frameWidth, (int)frameHeight);
-        
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _outputTextureID, 0);
+//        glGenFramebuffers(1, &_framebuffer);
+//        glBindFramebuffer(GL_FRAMEBUFFER, _framebuffer);
+//
+//        glActiveTexture(GL_TEXTURE1);
+//        glGenTextures(1, &_outputTextureID);
+//        glBindTexture(GL_TEXTURE_2D, _outputTextureID);
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)frameWidth, (int)frameHeight, 0, GL_BGRA, GL_UNSIGNED_BYTE, 0);
+//        NSLog(@"width=%d, height=%d", (int)frameWidth, (int)frameHeight);
+//
+//        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _outputTextureID, 0);
         GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         if (status != GL_FRAMEBUFFER_COMPLETE) {
             NSLog(@"failed to make complete framebuffer object %x", status);
@@ -120,7 +120,7 @@ NSString *const yuvFragmentShaderString = SHADER_STRING
 {
     int frameWidth = (int)videoFrame->width;
     int frameHeight = (int)videoFrame->height;
-    glBindFramebuffer(GL_FRAMEBUFFER, _framebuffer);
+//    glBindFramebuffer(GL_FRAMEBUFFER, _framebuffer);
     glUseProgram(filterProgram);
     glViewport(0, 0, frameWidth, frameHeight);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -162,7 +162,7 @@ NSString *const yuvFragmentShaderString = SHADER_STRING
     glUniformMatrix4fv(_uniformMatrix, 1, GL_FALSE, modelviewProj);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//    glBindFramebuffer(GL_FRAMEBUFFER, 0);
     
 }
 

@@ -9,7 +9,7 @@
 #import "BLHomeViewController.h"
 #include "BLMovieController.hpp"
 #import "BLAudioOutput.h"
-#import "VideoOutput.h"
+#import "BLVideoOutput.h"
 
 @interface BLHomeViewController () <BLAudioOutputDelegate> {
     BLMovieController *controller;
@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnStop;
 
 @property (nonatomic, strong) BLAudioOutput *output;
-@property (nonatomic, strong) VideoOutput *vOutput;
+@property (nonatomic, strong) BLVideoOutput *vOutput;
 
 @property (nonatomic, strong) NSInputStream *iStream;
 
@@ -41,7 +41,7 @@
     
     int tWidth = controller->vWidth();
     int tHeight = controller->vHeight();
-    _vOutput = [[VideoOutput alloc] initWithFrame:self.view.bounds textureWidth:tWidth textureHeight:tHeight usingHWCodec:NO shareGroup:nil];
+    _vOutput = [[BLVideoOutput alloc] initWithFrame:self.view.bounds];
     _vOutput.contentMode = UIViewContentModeScaleAspectFill;
     _vOutput.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -84,7 +84,7 @@
     controller->readSamples(samples, numberFrame * channels);
     BLVideoPacket *vPacket = controller->getCurrentVideoPacket();
     if (vPacket) {
-        [_vOutput presentVideoFrame:vPacket];
+        [_vOutput displayVideoFrame:vPacket];
     }
 }
 

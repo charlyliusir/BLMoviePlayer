@@ -34,18 +34,24 @@
 
 @implementation VideoOutput 
 {
+    // OpenGLES 2.0 Context
     EAGLContext*                            _context;
+    // 显示的帧缓冲
     GLuint                                  _displayFramebuffer;
+    // 渲染缓冲
     GLuint                                  _renderbuffer;
+    // 渲染图像的宽度
     GLint                                   _backingWidth;
+    // 渲染图像的高度
     GLint                                   _backingHeight;
     
     BOOL                                    _stopping;
     
+    // YUV 帧处理
     YUVFrameCopier*                         _videoFrameCopier;
-    
+    // 滤镜通道
     BaseEffectFilter*                       _filter;
-    
+    // 渲染器通道
     DirectPassRenderer*                     _directPassRenderer;
 }
 
@@ -106,17 +112,17 @@
                 NSLog(@"_videoFrameFastCopier prepareRender failed...");
             }
             
-            strongSelf->_filter = [self createImageProcessFilterInstance];
-            if (![strongSelf->_filter prepareRender:textureWidth height:textureHeight]) {
-                NSLog(@"_contrastEnhancerFilter prepareRender failed...");
-            }
-            [strongSelf->_filter setInputTexture:[strongSelf->_videoFrameCopier outputTextureID]];
-            
-            strongSelf->_directPassRenderer = [[DirectPassRenderer alloc] init];
-            if (![strongSelf->_directPassRenderer prepareRender:textureWidth height:textureHeight]) {
-                NSLog(@"_directPassRenderer prepareRender failed...");
-            }
-            [strongSelf->_directPassRenderer setInputTexture:[strongSelf->_filter outputTextureID]];
+//            strongSelf->_filter = [self createImageProcessFilterInstance];
+//            if (![strongSelf->_filter prepareRender:textureWidth height:textureHeight]) {
+//                NSLog(@"_contrastEnhancerFilter prepareRender failed...");
+//            }
+//            [strongSelf->_filter setInputTexture:[strongSelf->_videoFrameCopier outputTextureID]];
+
+//            strongSelf->_directPassRenderer = [[DirectPassRenderer alloc] init];
+//            if (![strongSelf->_directPassRenderer prepareRender:textureWidth height:textureHeight]) {
+//                NSLog(@"_directPassRenderer prepareRender failed...");
+//            }
+//            [strongSelf->_directPassRenderer setInputTexture:[strongSelf->_videoFrameCopier outputTextureID]];
             strongSelf.readyToRender = YES;
         }];
     }
@@ -185,11 +191,12 @@ static const NSInteger kMaxOperationQueueCount = 3;
             int frameWidth = (int)frame->width;
             int frameHeight = (int)frame->height;
             [EAGLContext setCurrentContext:strongSelf->_context];
-            [strongSelf->_videoFrameCopier renderWithTexId:frame];
-            [strongSelf->_filter renderWithWidth:frameWidth height:frameHeight position:frame->position];
+//            [strongSelf->_videoFrameCopier renderWithTexId:frame];
+//            [strongSelf->_filter renderWithWidth:frameWidth height:frameHeight position:frame->position];
             
             glBindFramebuffer(GL_FRAMEBUFFER, strongSelf->_displayFramebuffer);
-            [strongSelf->_directPassRenderer renderWithWidth:strongSelf->_backingWidth height:strongSelf->_backingHeight position:frame->position];
+//            [strongSelf->_directPassRenderer renderWithWidth:strongSelf->_backingWidth height:strongSelf->_backingHeight position:frame->position];
+            [strongSelf->_videoFrameCopier renderWithTexId:frame];
             glBindRenderbuffer(GL_RENDERBUFFER, strongSelf->_renderbuffer);
             [strongSelf->_context presentRenderbuffer:GL_RENDERBUFFER];
         }];

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BLFileQueue.hpp"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BLVideoOutput : UIView
+
+- (void)displayVideoFrame:(BLVideoPacket *)vFrame;
 
 @end
 

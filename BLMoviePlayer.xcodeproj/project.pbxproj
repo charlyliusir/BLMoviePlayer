@@ -48,7 +48,7 @@
 		F46E6929236046ED00B4C19F /* BaseEffectFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F46E6920236046ED00B4C19F /* BaseEffectFilter.m */; };
 		F46E692A236046ED00B4C19F /* ContrastEnhancerFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F46E6922236046ED00B4C19F /* ContrastEnhancerFilter.m */; };
 		F46E692B236046ED00B4C19F /* VideoOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = F46E6924236046ED00B4C19F /* VideoOutput.mm */; };
-		F46E692C236046ED00B4C19F /* BLVideoOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = F46E6925236046ED00B4C19F /* BLVideoOutput.m */; };
+		F46E692C236046ED00B4C19F /* BLVideoOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = F46E6925236046ED00B4C19F /* BLVideoOutput.mm */; };
 		F4AEA386235EF397009C60CF /* abc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA383235EF397009C60CF /* abc.mp4 */; };
 		F4AEA387235EF397009C60CF /* test.flv in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA384235EF397009C60CF /* test.flv */; };
 		F4AEA388235EF397009C60CF /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = F4AEA385235EF397009C60CF /* test.mov */; };
@@ -241,7 +241,7 @@
 		F46E6922236046ED00B4C19F /* ContrastEnhancerFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContrastEnhancerFilter.m; sourceTree = "<group>"; };
 		F46E6923236046ED00B4C19F /* ContrastEnhancerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContrastEnhancerFilter.h; sourceTree = "<group>"; };
 		F46E6924236046ED00B4C19F /* VideoOutput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoOutput.mm; sourceTree = "<group>"; };
-		F46E6925236046ED00B4C19F /* BLVideoOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLVideoOutput.m; sourceTree = "<group>"; };
+		F46E6925236046ED00B4C19F /* BLVideoOutput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BLVideoOutput.mm; sourceTree = "<group>"; };
 		F46E6926236046ED00B4C19F /* VideoOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoOutput.h; sourceTree = "<group>"; };
 		F4AEA383235EF397009C60CF /* abc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = abc.mp4; path = "../../../FFMpeg+OpenGLES/Projects/VideoStu/iOS-video_player_pro/video_player_pro/resource/abc.mp4"; sourceTree = "<group>"; };
 		F4AEA384235EF397009C60CF /* test.flv */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.flv; path = "../../../FFMpeg+OpenGLES/Projects/VideoStu/iOS-video_player_pro/video_player_pro/resource/test.flv"; sourceTree = "<group>"; };
@@ -773,7 +773,7 @@
 			children = (
 				F46E6919236046ED00B4C19F /* render */,
 				F46E6918236046ED00B4C19F /* BLVideoOutput.h */,
-				F46E6925236046ED00B4C19F /* BLVideoOutput.m */,
+				F46E6925236046ED00B4C19F /* BLVideoOutput.mm */,
 				F46E6926236046ED00B4C19F /* VideoOutput.h */,
 				F46E6924236046ED00B4C19F /* VideoOutput.mm */,
 			);
@@ -806,8 +806,8 @@
 		F46E6921236046ED00B4C19F /* filter */ = {
 			isa = PBXGroup;
 			children = (
-				F46E6922236046ED00B4C19F /* ContrastEnhancerFilter.m */,
 				F46E6923236046ED00B4C19F /* ContrastEnhancerFilter.h */,
+				F46E6922236046ED00B4C19F /* ContrastEnhancerFilter.m */,
 			);
 			path = filter;
 			sourceTree = "<group>";
@@ -948,7 +948,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F46E692C236046ED00B4C19F /* BLVideoOutput.m in Sources */,
+				F46E692C236046ED00B4C19F /* BLVideoOutput.mm in Sources */,
 				F446F4DE235568DC00C8545D /* BLMovieController.cpp in Sources */,
 				7C4A6AE922F9C42C00BEACA8 /* BLHomeViewController.mm in Sources */,
 				F46E692B236046ED00B4C19F /* VideoOutput.mm in Sources */,
